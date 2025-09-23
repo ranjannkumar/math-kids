@@ -1,6 +1,7 @@
 // src/components/TablePicker.jsx
 import React, { useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 import { MathGameContext } from '../App.jsx';
 
 const TOTAL_LEVELS = 6; // only 6 levels as required
@@ -88,10 +89,15 @@ const TablePicker = () => {
       <div className="w-full max-w-5xl">
         <div className="flex items-center justify-between mb-6">
           <button
-            className="bg-white/80 hover:bg-white text-gray-800 font-semibold px-4 py-2 rounded-xl shadow transition"
+            className="fixed z-50 bg-white/80 hover:bg-gray-200 text-gray-700 rounded-full p-2 shadow-lg border-2 border-gray-400 focus:outline-none transition-all duration-300 transform hover:scale-110 active:scale-95"
+            style={{
+              fontSize: 'clamp(1rem, 4vw, 1.5rem)',
+              top: 'max(env(safe-area-inset-top), 0.5rem)',
+              left: 'max(env(safe-area-inset-left), 0.5rem)',
+            }}
             onClick={() => navigate('/theme')}
           >
-            ⟵ Themes
+            <FaArrowLeft size={24} />
           </button>
           <h1 className="text-white text-3xl font-extrabold drop-shadow">Choose a Level</h1>
           <div className="w-[92px]" />

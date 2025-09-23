@@ -1,4 +1,3 @@
-// src/components/MainLayout.jsx
 import React, { useContext } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { FaCog } from 'react-icons/fa';
@@ -14,6 +13,7 @@ const MainLayout = () => {
     isTimerPaused,
     quizStartTime,
     pausedTime,
+    elapsedTime,
     handleQuit,
     handleResetProgress,
   } = useContext(MathGameContext);
@@ -62,7 +62,7 @@ const MainLayout = () => {
             startTime={quizStartTime}
             isPaused={isTimerPaused}
             pauseStartTime={pausedTime}
-            accumulatedTime={0}
+            accumulatedTime={elapsedTime}
           />
         </div>
       )}

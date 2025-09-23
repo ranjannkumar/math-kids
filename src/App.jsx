@@ -14,6 +14,7 @@ import SpeedTestScreen from './components/ui/SpeedTestScreen.jsx';
 import PreTestPopup from './components/PreTestPopup.jsx';
 import PreTestScreen from './components/PreTestScreen.jsx';
 import SettingsModal from './components/SettingsModal.jsx';
+import MainLayout from './components/MainLayout.jsx';
 
 import { clearShootingStars } from './utils/mathGameLogic.js';
 import audioManager from './utils/audioUtils.js';
@@ -44,12 +45,14 @@ const App = () => {
         <Route path="/pre-test-popup" element={<PreTestPopup />} />
         <Route path="/pre-test" element={<PreTestScreen />} />
         <Route path="/theme" element={<ThemePicker />} />
-        <Route path="/levels" element={<TablePicker />} />
-        <Route path="/belts" element={<DifficultyPicker />} />
-        <Route path="/black" element={<BlackBeltPicker />} /> {/* ✅ BLACK ROUTE */}
-        <Route path="/learning" element={<LearningModule />} />
-        <Route path="/quiz" element={<QuizScreen />} />
-        <Route path="/results" element={<ResultsScreen />} />
+        <Route element={<MainLayout />}>
+          <Route path="/levels" element={<TablePicker />} />
+          <Route path="/belts" element={<DifficultyPicker />} />
+          <Route path="/black" element={<BlackBeltPicker />} /> {/* ✅ BLACK ROUTE */}
+          <Route path="/learning" element={<LearningModule />} />
+          <Route path="/quiz" element={<QuizScreen />} />
+          <Route path="/results" element={<ResultsScreen />} />
+        </Route>
       </Routes>
 
       {/* Optional overlays kept here if you use them */}

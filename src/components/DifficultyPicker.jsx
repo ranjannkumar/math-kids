@@ -18,7 +18,6 @@ const beltImages = {
 
 const beltPretty = (b) => b.charAt(0).toUpperCase() + b.slice(1);
 
-// top strip colors (match 3000 look)
 const BELT_STRIP = {
   white: 'bg-gray-200',
   yellow: 'bg-yellow-400',
@@ -76,11 +75,8 @@ const DifficultyPicker = () => {
 
   const handlePick = (belt, locked) => {
     if (locked) return;
-    if (belt === 'black') {
-      navigate('/black');
-    } else {
-      startQuizWithDifficulty(belt);
-    }
+    if (belt === 'black') navigate('/black');
+    else startQuizWithDifficulty(belt);
   };
 
   const getBeltProgress = (belt) => {
@@ -130,11 +126,7 @@ const DifficultyPicker = () => {
           <h3 className="text-[20px] leading-6 font-extrabold text-slate-800 mt-1 mb-2">
             {beltPretty(belt)} <span className="font-extrabold">Belt</span>
           </h3>
-          <img
-            src={beltImages[belt]}
-            alt={`${belt} belt`}
-            className="h-12 mx-auto my-1 drop-shadow"
-          />
+          <img src={beltImages[belt]} alt={`${belt} belt`} className="h-12 mx-auto my-1 drop-shadow" />
           <div className="text-[18px] mb-1">{hasCompleted ? '⭐' : '☆'}</div>
           <div className="text-slate-700 text-[13px]">10 Questions</div>
         </CardShell>
@@ -151,14 +143,8 @@ const DifficultyPicker = () => {
         className="text-center md:col-start-2 lg:col-start-2 justify-self-center"
       >
         <CardShell locked={locked} stripColor={BELT_STRIP.black}>
-          <h3 className="text-[20px] leading-6 font-extrabold text-slate-800 mt-1 mb-2">
-            Black Belt
-          </h3>
-          <img
-            src={beltImages.black}
-            alt="Black belt"
-            className="h-12 mx-auto my-1 drop-shadow"
-          />
+          <h3 className="text-[20px] leading-6 font-extrabold text-slate-800 mt-1 mb-2">Black Belt</h3>
+          <img src={beltImages.black} alt="Black belt" className="h-12 mx-auto my-1 drop-shadow" />
           <div className="text-[18px] mb-1">☆</div>
           <div className="text-slate-700 text-[13px]">Degrees 1–7</div>
         </CardShell>
@@ -168,7 +154,7 @@ const DifficultyPicker = () => {
 
   return (
     <div
-      className="min-h-screen w-full px-4 py-6 flex flex-col items-center"
+      className="min-h-screen w-full px-4 py-6 flex items-center justify-center"
       style={{
         backgroundImage: "url('/night_sky_landscape.jpg')",
         backgroundSize: 'cover',
@@ -176,31 +162,26 @@ const DifficultyPicker = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Center wrapper (this is the key change) */}
-      <div className="w-full max-w-5xl mx-auto">
-        {/* header: centered title */}
-        <div className="flex items-center justify-between mb-6">
-          <button
-            className="fixed z-50 bg-white/80 hover:bg-gray-200 text-gray-700 rounded-full p-2 shadow-lg border-2 border-gray-400 focus:outline-none transition-all duration-300 transform hover:scale-110 active:scale-95"
-            style={{
-              fontSize: 'clamp(1rem, 4vw, 1.5rem)',
-              top: 'max(env(safe-area-inset-top), 0.5rem)',
-              left: 'max(env(safe-area-inset-left), 0.5rem)',
-            }}
-            onClick={() => navigate('/levels')}
-          >
-            <FaArrowLeft size={24} />
-          </button>
+      {/* Fixed back button (doesn't affect centering) */}
+      <button
+        className="fixed z-50 bg-white/80 hover:bg-gray-200 text-gray-700 rounded-full p-2 shadow-lg border-2 border-gray-400 transition-all duration-300 transform hover:scale-110 active:scale-95"
+        style={{
+          top: 'max(env(safe-area-inset-top), 0.5rem)',
+          left: 'max(env(safe-area-inset-left), 0.5rem)',
+        }}
+        onClick={() => navigate('/levels')}
+        aria-label="Back"
+      >
+        <FaArrowLeft size={24} />
+      </button>
 
-          <h1 className="text-white text-3xl font-extrabold drop-shadow text-center mx-auto">
-            Level {selectedTable}
-          </h1>
+      {/* Centered content (title + grid) */}
+      <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
+        <h1 className="text-white text-3xl font-extrabold drop-shadow mb-3 text-center">
+          Level {selectedTable}
+        </h1>
 
-          <div className="w-12 h-12" />
-        </div>
-
-        {/* centered grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center justify-items-center place-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6 place-items-center justify-items-center">
           {COLOR_BELTS.map((b) => renderCard(b))}
           {renderBlackBeltCard()}
         </div>

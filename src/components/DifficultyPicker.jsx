@@ -181,7 +181,7 @@ const DifficultyPicker = () => {
           Level {selectedTable}
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6 place-items-center justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0  place-items-center justify-items-center">
           {COLOR_BELTS.map((b) => renderCard(b))}
           {renderBlackBeltCard()}
         </div>

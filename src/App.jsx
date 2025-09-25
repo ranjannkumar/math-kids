@@ -9,6 +9,7 @@ import DifficultyPicker from './components/DifficultyPicker.jsx';
 import BlackBeltPicker from './components/BlackBeltPicker.jsx'; // ✅ NEW ROUTE TARGET
 import QuizScreen from './components/QuizScreen.jsx';
 import ResultsScreen from './components/ResultsScreen.jsx';
+import WayToGoScreen from './components/WayToGoScreen.jsx';
 import LearningModule from './components/LearningModule.jsx';
 import SpeedTestScreen from './components/ui/SpeedTestScreen.jsx';
 import PreTestPopup from './components/PreTestPopup.jsx';
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/learning" element={<LearningModule />} />
           <Route path="/quiz" element={<QuizScreen />} />
           <Route path="/results" element={<ResultsScreen />} />
+          <Route path="/way-to-go" element={<WayToGoScreen />} />
         </Route>
       </Routes>
 

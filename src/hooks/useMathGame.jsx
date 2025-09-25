@@ -367,6 +367,23 @@ const useMathGame = () => {
     [currentQuestion, isAnimating, showResult, maxQuestions, pausedTime, selectedDifficulty, navigate, handleNextQuestion]
   );
 
+  useEffect(() => {
+    if (!currentQuestion || isTimerPaused || showResult) return;
+
+    if (questionTimeoutId.current) clearTimeout(questionTimeoutId.current);
+
+    questionTimeoutId.current = setTimeout(() => {
+        // Trigger inactivity logic
+        setIsTimerPaused(true);
+        setPausedTime(Date.now());
+        setPendingDifficulty(selectedDifficulty);
+        // This is a new state to pass the question to the learning module
+        // setInterventionQuestion(currentQuestion);
+        setShowLearningModule(true);
+        navigate('/learning');
+    }, 5000); // 5 seconds
+}, [currentQuestion, isTimerPaused, showResult, selectedDifficulty, navigate]);
+
   const handleBackToThemePicker = useCallback(() => navigate('/theme'), [navigate]);
   const handleBackToNameForm = useCallback(() => navigate('/name'), [navigate]);
 
@@ -392,10 +409,26 @@ const useMathGame = () => {
   const handleAgeChange = useCallback((e) => setChildAge(e.target.value), []);
   const handlePinChange = useCallback((e) => setChildPin(e.target.value), []);
 
+  // const getQuizTimeLimit = useCallback(() => {
+  //   if (!selectedDifficulty) return 0;
+  //   if (selectedDifficulty.startsWith('black')) return selectedDifficulty.endsWith('7') ? 30 : 60;
+  //   return 0;
+  // }, [selectedDifficulty]);
   const getQuizTimeLimit = useCallback(() => {
-    if (!selectedDifficulty) return 0;
-    if (selectedDifficulty.startsWith('black')) return selectedDifficulty.endsWith('7') ? 30 : 60;
-    return 0;
+    if (!selectedDifficulty || !selectedDifficulty.startsWith('black')) {
+        return 0;
+    }
+    const degree = parseInt(selectedDifficulty.split('-')[1]);
+    switch (degree) {
+        case 1: return 60;
+        case 2: return 55;
+        case 3: return 50;
+        case 4: return 45;
+        case 5: return 40;
+        case 6: return 35;
+        case 7: return 30;
+        default: return 0;
+    }
   }, [selectedDifficulty]);
 
   return {

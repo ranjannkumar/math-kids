@@ -65,6 +65,7 @@ const ThemePicker = () => {
     if (!themes.length || !currentTheme) return;
     // Persist the whole theme object (key + config) into context
     setSelectedTheme(currentTheme);
+    try { localStorage.setItem('math-selected-theme', currentTheme.key); } catch {}
     navigate('/levels');
   };
 
